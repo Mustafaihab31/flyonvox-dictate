@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>D - Zen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141310;--panel:#1b1916;--raised:#211e19;
+--border:#302c24;--border2:#454033;--t1:#ede9dd;--t2:#a49e8d;--t3:#6b665a;
+--accent:#d9a441;--ink:#1c1608}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--t1);font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center}
+
+.center{display:flex;flex-direction:column;align-items:center;gap:26px;width:560px;max-width:90vw}
+.ring{width:110px;height:110px;border-radius:50%;border:2px solid var(--border2);display:grid;place-items:center}
+.mic{width:78px;height:78px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-size:22px;cursor:pointer;box-shadow:0 14px 40px -10px rgba(217,164,65,.5)}
+.status{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--t3)}
+
+.skel{width:100%;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.line{height:12px;border-radius:99px;background:var(--raised)}
+.line:nth-child(1){width:92%}.line:nth-child(2){width:78%}.line:nth-child(3){width:55%}
+
+.gear{position:fixed;bottom:22px;right:22px;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:none;border:1px solid var(--border);color:var(--t3);cursor:pointer}
+.gear:hover{color:var(--accent);border-color:rgba(217,164,65,.35)}
+</style>
+</head>
+<body>
+
+<div class="center">
+  <div class="ring"><div class="mic">&#9679;</div></div>
+  <div class="status">Ready to listen</div>
+  <div class="skel">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+</div>
+
+<button class="gear">&#9881;</button>
+
+</body>
+</html>

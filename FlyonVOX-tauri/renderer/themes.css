@@ -1,0 +1,152 @@
+/* ============================================================
+   Theme tokens — loaded before page styles in every window.
+   Default: Graphite (warm dark + brass). Switch via
+   document.documentElement.dataset.theme = "<id>"
+   ============================================================ */
+
+:root,
+:root[data-theme="graphite"] {
+  --bg-root: #141310;
+  --bg-panel: #1b1916;
+  --bg-raised: #211e19;
+  --bg-input: #26231d;
+  --bg-hover: #2c2922;
+  --border: #302c24;
+  --border-strong: #454033;
+  --text-hi: #ede9dd;
+  --text-mid: #a49e8d;
+  --text-low: #6b665a;
+  --accent: #d9a441;
+  --accent-hover: #e6b455;
+  --accent-ink: #1c1608;
+  --accent-dim: rgba(217, 164, 65, 0.12);
+  --danger: #ff6b57;
+  --danger-dim: rgba(255, 107, 87, 0.14);
+  --ok: #9dc98b;
+  /* Gradient slots - solid accent by default, themed below */
+  --grad: var(--accent);
+  --bubble-bg: var(--bg-panel);
+  --bubble-border: var(--accent);
+  --bubble-fg: var(--accent);
+}
+
+:root[data-theme="daylight"] {
+  --bg-root: #f2efe7;
+  --bg-panel: #faf8f2;
+  --bg-raised: #eceadf;
+  --bg-input: #e7e4d7;
+  --bg-hover: #dedacb;
+  --border: #dcd7c8;
+  --border-strong: #c2bba6;
+  --text-hi: #27231a;
+  --text-mid: #6b6552;
+  --text-low: #9c957f;
+  --accent: #a87908;
+  --accent-hover: #8f6706;
+  --accent-ink: #fff9ea;
+  --accent-dim: rgba(168, 121, 8, 0.14);
+  --danger: #cf4433;
+  --danger-dim: rgba(207, 68, 51, 0.12);
+  --ok: #477d38;
+}
+
+:root[data-theme="forest"] {
+  --bg-root: #101613;
+  --bg-panel: #16201b;
+  --bg-raised: #1b2822;
+  --bg-input: #202f27;
+  --bg-hover: #26382e;
+  --border: #24352c;
+  --border-strong: #35503f;
+  --text-hi: #e6efe7;
+  --text-mid: #9db4a4;
+  --text-low: #63796a;
+  --accent: #7fd962;
+  --accent-hover: #92e67a;
+  --accent-ink: #0c2008;
+  --accent-dim: rgba(127, 217, 98, 0.12);
+  --danger: #ff6b57;
+  --danger-dim: rgba(255, 107, 87, 0.14);
+  --ok: #9dc98b;
+}
+
+:root[data-theme="ocean"] {
+  --bg-root: #0e1418;
+  --bg-panel: #131c22;
+  --bg-raised: #18242c;
+  --bg-input: #1d2b34;
+  --bg-hover: #23343f;
+  --border: #21323d;
+  --border-strong: #335061;
+  --text-hi: #e4edf2;
+  --text-mid: #97adb9;
+  --text-low: #5f7581;
+  --accent: #38bdd8;
+  --accent-hover: #55cde4;
+  --accent-ink: #04222b;
+  --accent-dim: rgba(56, 189, 216, 0.12);
+  --danger: #ff6b57;
+  --danger-dim: rgba(255, 107, 87, 0.14);
+  --ok: #7fd0a0;
+}
+
+:root[data-theme="crimson"] {
+  --bg-root: #171010;
+  --bg-panel: #201616;
+  --bg-raised: #281b1b;
+  --bg-input: #30201f;
+  --bg-hover: #392625;
+  --border: #3a2625;
+  --border-strong: #553836;
+  --text-hi: #f2e8e6;
+  --text-mid: #b89f9c;
+  --text-low: #7d6663;
+  --accent: #ff6b57;
+  --accent-hover: #ff8574;
+  --accent-ink: #2a0d07;
+  --accent-dim: rgba(255, 107, 87, 0.12);
+  --danger: #ffb02e;
+  --danger-dim: rgba(255, 176, 46, 0.14);
+  --ok: #9dc98b;
+}
+
+:root[data-theme="slate"] {
+  --bg-root: #14171a;
+  --bg-panel: #191d21;
+  --bg-raised: #1f242a;
+  --bg-input: #242a31;
+  --bg-hover: #2a3138;
+  --border: #272e35;
+  --border-strong: #3b444d;
+  --text-hi: #e8ebee;
+  --text-mid: #9aa5af;
+  --text-low: #646e78;
+  --accent: #88c0d0;
+  --accent-hover: #9ccfe0;
+  --accent-ink: #10262c;
+  --accent-dim: rgba(136, 192, 208, 0.12);
+  --danger: #bf6055;
+  --danger-dim: rgba(191, 96, 85, 0.16);
+  --ok: #a3be8c;
+}
+
+:root[data-theme="mono"] {
+  --bg-root: #111111;
+  --bg-panel: #181818;
+  --bg-raised: #1f1f1f;
+  --bg-input: #252525;
+  --bg-hover: #2c2c2c;
+  --border: #2d2d2d;
+  --border-strong: #454545;
+  --text-hi: #f0f0f0;
+  --text-mid: #a3a3a3;
+  --text-low: #6b6b6b;
+  --accent: #ffffff;
+  --accent-hover: #e6e6e6;
+  --accent-ink: #111111;
+  --accent-dim: rgba(255, 255, 255, 0.1);
+  --danger: #ff5d5d;
+  --danger-dim: rgba(255, 93, 93, 0.14);
+  --ok: #8fc973;
+}
+

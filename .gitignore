@@ -1,0 +1,22 @@
+# Local configuration and runtime data
+FlyonVOX-tauri/config.json
+FlyonVOX-tauri/recording.wav
+FlyonVOX-tauri/models/
+FlyonVOX-tauri/.venv/
+FlyonVOX-tauri/__pycache__/
+FlyonVOX-tauri/**/*.pyc
+
+# JavaScript dependencies and build output
+FlyonVOX-tauri/node_modules/
+FlyonVOX-tauri/src-tauri/target/
+FlyonVOX-tauri/src-tauri/gen/
+
+# Local/editor/system files
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+.idea/
+.vscode/
+

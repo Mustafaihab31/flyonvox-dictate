@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fly Overlay</title>
+  <link rel="stylesheet" href="themes.css">
+  <link rel="stylesheet" href="overlay.css">
+</head>
+<body class="state-idle">
+
+  <!-- Idle / transcribing: circle -->
+  <div id="bubble" class="bubble" title="Click to record - hold and drag to move">
+    <svg id="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+      <line x1="12" y1="19" x2="12" y2="22"/>
+    </svg>
+    <div id="spin-ring" class="spin-ring"></div>
+  </div>
+
+  <!-- Recording: rounded volume bar -->
+  <div id="bar" class="bar" title="Click to stop - hold and drag to move">
+    <div class="bars">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <script src="preload.js"></script>
+  <script src="theme.js"></script>
+  <script src="overlay.js"></script>
+</body>
+</html>

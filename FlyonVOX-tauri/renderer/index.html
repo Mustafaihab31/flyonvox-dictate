@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlyonVOX Dictate</title>
+  <link rel="stylesheet" href="themes.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Startup Loading Screen -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-content">
+      <div class="loading-logo-wrapper">
+        <div class="loading-logo-glow"></div>
+        <div class="loading-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </div>
+      </div>
+      <h1 class="loading-brand">FlyonVOX</h1>
+      <p id="loading-status" class="loading-status">Initializing engine...</p>
+      <div class="loading-bar-track">
+        <div class="loading-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="app">
+
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Fly</span>
+          <span class="logo-sub">local dictation</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="shell">
+
+      <!-- Rail -->
+      <nav class="rail">
+        <button class="rail-btn active" data-view="dictation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+          <span>Dictation</span>
+        </button>
+        <button class="rail-btn" data-view="downloads">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Downloads</span>
+        </button>
+        <button class="rail-btn" data-view="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <!-- Content -->
+      <main class="content-area">
+
+        <!-- ============ Dictation ============ -->
+        <section class="view" id="view-dictation">
+          <section class="stage">
+            <div class="stage-top">
+              <div class="indicator-wrapper">
+                <div id="rec-indicator" class="indicator idle"></div>
+                <span id="status-text">Ready</span>
+              </div>
+              <div class="stage-actions">
+                <span id="session-meta" class="meta-chip">0 words &middot; 00:00</span>
+                <button id="copy-btn" class="text-btn accent" title="Copy transcript">Copy</button>
+                <button id="clear-btn" class="text-btn" title="Clear transcript">Clear</button>
+              </div>
+            </div>
+
+            <textarea id="output" readonly placeholder="Hit record and just talk - your words land here." spellcheck="false"></textarea>
+
+            <button id="toggle-btn" class="fab">
+              <span class="btn-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </span>
+              <span class="btn-text">Record</span>
+            </button>
+          </section>
+
+          <footer class="statusbar">
+            <div class="chip-wrap custom-select" id="model-select">
+              <button class="chip select-trigger" id="select-trigger" title="Switch model">
+                <span class="chip-label">Model</span><b id="select-value">tiny.en</b><span class="chip-caret">&#9662;</span>
+              </button>
+              <div class="select-dropdown" id="select-dropdown">
+                <div class="select-dropdown-inner" id="select-dropdown-inner"></div>
+              </div>
+            </div>
+
+            <button class="chip" id="device-chip" title="Toggle compute device">
+              <span class="chip-label">Device</span><b id="device-val">CUDA</b>
+            </button>
+
+            <button class="chip" id="precision-chip" title="Toggle precision">
+              <span class="chip-label">Precision</span><b id="precision-val">INT8</b>
+            </button>
+
+            <span class="spacer"></span>
+
+            <span class="chip ghost" id="hotkey-chip" title="Change it under Settings">
+              <span class="chip-label">Hotkey</span><b id="hotkey-val">Ctrl+Alt+R</b>
+            </span>
+          </footer>
+        </section>
+
+        <!-- ============ Downloads ============ -->
+        <section class="view hidden" id="view-downloads">
+          <section class="panel">
+            <div class="s-row">
+              <span class="s-label">Model Storage</span>
+              <button id="refresh-btn" class="icon-btn" title="Refresh">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <polyline points="1 20 1 14 7 14"></polyline>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+              </button>
+            </div>
+            <div id="model-list"></div>
+            <div id="progress-wrapper" class="progress-wrapper hidden">
+              <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+              <span id="progress-label" class="progress-label"></span>
+            </div>
+          </section>
+        </section>
+
+        <!-- ============ Settings ============ -->
+        <section class="view hidden" id="view-settings">
+          <section class="panel scroll">
+            <div class="s-section">
+              <span class="s-label">Appearance</span>
+              <p class="s-hint">"System" follows your Windows theme.</p>
+              <div id="theme-grid" class="theme-grid"></div>
+
+              <div class="toggle-row">
+                <div class="t-info">
+                  <div class="t-title">Circulating gradient outline</div>
+                  <p class="s-hint">While recording, a rainbow outline spins around the record controls.</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="grad-toggle">
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="s-section">
+              <span class="s-label">Compute Device</span>
+              <div class="seg" id="device-seg">
+                <button data-device="cuda">CUDA (GPU)</button>
+                <button data-device="cpu">CPU</button>
+              </div>
+            </div>
+
+            <div class="s-section">
+              <span class="s-label">Precision</span>
+              <div class="seg" id="precision-seg">
+                <button data-compute="int8">INT8</button>
+                <button data-compute="float16">FP16</button>
+              </div>
+              <p class="s-hint">FP16 needs a Volta/RTX-class GPU. INT8 is fastest on most cards.</p>
+            </div>
+
+            <div class="s-section">
+              <span class="s-label">Global Hotkey</span>
+              <input type="text" id="hotkey-input" readonly placeholder="Click, then press keys..." autocomplete="off">
+              <p id="hotkey-note" class="s-hint">Works system-wide, in any app.</p>
+            </div>
+
+            <div class="s-section">
+              <span class="s-label">Behavior</span>
+
+              <div class="toggle-row">
+                <div class="t-info">
+                  <div class="t-title">Preserve clipboard</div>
+                  <p class="s-hint">Saves what you had copied, pastes the transcript, then restores your clipboard.</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="preserve-toggle">
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+
+              <div class="toggle-row">
+                <div class="t-info">
+                  <div class="t-title">Floating overlay bubble</div>
+                  <p class="s-hint">Small always-on-top circle above your windows. Click it to record - it becomes a live volume bar while you speak.</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="overlay-toggle">
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+
+              <div class="toggle-row">
+                <div class="t-info">
+                  <div class="t-title">Start minimized to tray</div>
+                  <p class="s-hint">Launch silently into the system tray. The overlay bubble still appears; reopen the app from the tray icon.</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="startmin-toggle">
+                  <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+          </section>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============ First-use Onboarding ============ -->
+  <div id="onboarding" class="ob-backdrop hidden">
+    <div class="ob-card">
+      <header class="ob-head">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="ob-title">Welcome to FlyonVOX</h1>
+          <p class="ob-sub">Local dictation, three quick choices - then you're done.</p>
+        </div>
+      </header>
+
+      <nav class="ob-steps">
+        <span class="ob-step active" data-step="1">1 &middot; Model</span>
+        <span class="ob-step" data-step="2">2 &middot; Behavior</span>
+        <span class="ob-step" data-step="3">3 &middot; Finish</span>
+      </nav>
+
+      <!-- Step 1: pick a model -->
+      <section class="ob-pane" id="ob-pane-model">
+        <p class="s-hint">Everything runs on your machine. Pick a speech engine - you can switch or add more later in Downloads.</p>
+        <div id="ob-model-list" class="ob-model-list"></div>
+        <p class="s-hint" id="ob-model-note"></p>
+      </section>
+
+      <!-- Step 2: behavior -->
+      <section class="ob-pane hidden" id="ob-pane-behavior">
+        <div class="toggle-row">
+          <div class="t-info">
+            <div class="t-title">Floating overlay bubble</div>
+            <p class="s-hint">Small always-on-top circle that shows recording state and volume anywhere.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="ob-overlay-toggle" checked>
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="t-info">
+            <div class="t-title">Preserve clipboard</div>
+            <p class="s-hint">Transcripts are pasted into any app; this restores what you had copied afterwards.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="ob-clipboard-toggle">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="t-info">
+            <div class="t-title">Start minimized to tray</div>
+            <p class="s-hint">Launch silently next time; reopen from the tray icon.</p>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="ob-startmin-toggle">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <div class="s-section">
+          <span class="s-label">Global Hotkey</span>
+          <input type="text" id="ob-hotkey-input" readonly placeholder="Click, then press keys..." autocomplete="off">
+          <p id="ob-hotkey-note" class="s-hint">Works system-wide, in any app. Default Ctrl+Alt+R.</p>
+        </div>
+      </section>
+
+      <!-- Step 3: summary + run -->
+      <section class="ob-pane hidden" id="ob-pane-finish">
+        <div class="ob-summary" id="ob-summary"></div>
+        <div id="ob-progress-wrap" class="progress-wrapper hidden">
+          <div class="progress-bar"><div id="ob-progress-fill" class="progress-fill"></div></div>
+          <span id="ob-progress-label" class="progress-label"></span>
+        </div>
+      </section>
+
+      <footer class="ob-nav">
+        <button id="ob-back" class="text-btn" disabled>Back</button>
+        <span class="spacer"></span>
+        <button id="ob-next" class="text-btn accent">Next</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="preload.js"></script>
+  <script src="theme.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

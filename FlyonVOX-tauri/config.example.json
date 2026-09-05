@@ -1,0 +1,13 @@
+{
+  "hotkey": "Ctrl+Alt+R",
+  "device": "cpu",
+  "model": "tiny.en",
+  "language": "en",
+  "compute": "int8",
+  "theme": "system",
+  "preserve_clipboard": false,
+  "overlay_enabled": true,
+  "start_minimized": false,
+  "gradient_outline": false,
+  "onboarded": false
+}

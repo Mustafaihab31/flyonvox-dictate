@@ -1,0 +1,8 @@
+sherpa-onnx==1.13.6
+onnxruntime
+numpy
+sounddevice
+pyperclip
+pyautogui
+faster-whisper
+huggingface_hub

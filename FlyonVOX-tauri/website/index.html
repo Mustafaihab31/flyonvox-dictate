@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="mono">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flyon Vox — local dictation that pastes itself</title>
+  <meta name="description" content="Flyon Vox is a lightning-fast, fully local speech-to-text app for Windows. Press a key, talk, and your words land wherever your cursor is.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============== NAV ============== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Flyon Vox home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">Flyon <em>Vox</em></span>
+          <span class="brand-sub">local dictation</span>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#preview">Preview</a>
+        <a href="#download" class="nav-cta">Download</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <span class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          v1.0 · Windows · 100% offline
+        </span>
+
+        <h1 class="hero-title">
+          Speak once.<br>
+          Your words <span class="accent">land</span> where
+          your cursor is.
+        </h1>
+
+        <p class="hero-sub">
+          Flyon Vox turns your voice into clean text, right on your machine &mdash; no cloud,
+          no latency, no leaks. Press a key, talk, and it pastes itself.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#download" class="btn primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download for Windows</span>
+          </a>
+          <a href="#how" class="btn ghost">See how it works</a>
+        </div>
+
+        <div class="hero-meta">
+          <span><b>~250ms</b> first-token</span>
+          <span class="dot"></span>
+          <span><b>0</b> bytes uploaded</span>
+          <span class="dot"></span>
+          <span><b>8</b> voices, 4 languages</span>
+        </div>
+      </div>
+
+      <!-- Mockup window -->
+      <div class="hero-shot" aria-label="Flyon Vox app preview">
+        <div class="shot-chrome">
+          <span class="shot-dot r"></span>
+          <span class="shot-dot y"></span>
+          <span class="shot-dot g"></span>
+          <span class="shot-title">Flyon Vox</span>
+          <span class="shot-spacer-mini"></span>
+          <span class="shot-badge">Idle</span>
+        </div>
+
+        <div class="shot-body">
+          <aside class="shot-rail">
+            <div class="shot-rail-brand">
+              <span class="shot-brand-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </span>
+            </div>
+            <button class="shot-rail-btn active">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg></span>
+              Dictation
+            </button>
+            <button class="shot-rail-btn">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+              Downloads
+            </button>
+            <button class="shot-rail-btn">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+              Settings
+            </button>
+          </aside>
+
+          <div class="shot-main">
+            <div class="shot-top">
+              <div class="shot-status">
+                <span class="indicator idle"></span>
+                <span class="status-text">Ready</span>
+              </div>
+              <div class="shot-actions">
+                <span class="shot-action">Copy</span>
+                <span class="shot-action">Clear</span>
+              </div>
+            </div>
+
+            <p class="shot-transcript">
+              Welcome back. Press <b class="kbd-inline">Ctrl + Alt + Space</b> anywhere
+              to start dictating &mdash; your words will appear here, then paste
+              themselves into whatever app you were just typing in.
+            </p>
+
+            <div class="shot-fab">
+              <span class="shot-fab-ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </span>
+              <span>Record</span>
+            </div>
+
+            <div class="shot-bar">
+              <span class="shot-chip"><i>Engine</i> <b>Whisper</b></span>
+              <span class="shot-chip"><i>Model</i> <b>large-v3-turbo</b></span>
+              <span class="shot-chip"><i>Device</i> <b>CUDA</b></span>
+              <span class="shot-spacer"></span>
+              <span class="shot-chip ghost"><i>Hotkey</i> <b>Ctrl+Alt+Space</b></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating overlay bubble mockup -->
+        <div class="shot-bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== FEATURES ============== -->
+    <section class="features" id="features">
+      <header class="section-head">
+        <span class="kicker">01 — What it does</span>
+        <h2>Built for people who type with their voice.</h2>
+        <p>Every feature exists because a real dictation session demanded it.</p>
+      </header>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <div class="feature-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          </div>
+          <h3>Hotkey from anywhere</h3>
+          <p>One combo, system-wide. Press to start, press again to stop. The app quietly parks in your tray.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <h3>Pastes itself</h3>
+          <p>Transcripts land in the active window &mdash; Slack, Notion, your terminal. Clipboard is restored after.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Local &amp; offline</h3>
+          <p>Whisper runs on your CPU or GPU. No data leaves the machine. Works on a plane, in a vault, in a basement.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Blazing fast</h3>
+          <p>First words appear in under a second on a mid-range GPU. Long clips transcribe faster than realtime.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+          </div>
+          <h3>Many languages</h3>
+          <p>English-only or multilingual Whisper models, switchable in one click. Pick the one that matches your voice.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Floating bubble</h3>
+          <p>An always-on-top mic circle that turns into a live volume bar when you speak. Drag it anywhere, click to record.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============== HOW IT WORKS ============== -->
+    <section class="how" id="how">
+      <header class="section-head">
+        <span class="kicker">02 — How it works</span>
+        <h2>Three steps. Zero friction.</h2>
+        <p>Designed to disappear into your workflow, not interrupt it.</p>
+      </header>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num">01</span>
+          <h3>Press the hotkey</h3>
+          <p>A small floating bubble appears. The system chime is optional and gentle.</p>
+          <div class="step-card">
+            <span class="kbd">Ctrl</span>
+            <span class="kbd">Alt</span>
+            <span class="kbd accent">Space</span>
+          </div>
+        </li>
+
+        <li class="step">
+          <span class="step-num">02</span>
+          <h3>Talk naturally</h3>
+          <p>Whisper transcribes on your machine as you speak. Pause, think, restart &mdash; it handles it.</p>
+          <div class="step-card visualizer">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </li>
+
+        <li class="step">
+          <span class="step-num">03</span>
+          <h3>It pastes</h3>
+          <p>The transcript lands in whatever app had focus. Your clipboard is restored right after.</p>
+          <div class="step-card">
+            <span class="kbd accent">Ctrl</span>
+            <span class="kbd accent">V</span>
+            <span class="arrow">&rarr;</span>
+            <span class="target">Pasted!</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============== PREVIEW / MODES ============== -->
+    <section class="preview" id="preview">
+      <header class="section-head">
+        <span class="kicker">03 — Many engines</span>
+        <h2>Whisper, Parakeet, Canary &mdash; your call.</h2>
+        <p>One app, many state-of-the-art speech models. Switch in a click; settings persist between launches.</p>
+      </header>
+
+      <div class="cards">
+        <article class="card">
+          <span class="card-tag">Whisper</span>
+          <h3>OpenAI Whisper</h3>
+          <p>The classic. Rock-solid multilingual, runs on CPU or GPU. tiny to large-v3-turbo.</p>
+          <ul class="card-list">
+            <li><b>tiny &mdash; 75MB</b></li>
+            <li><b>base &mdash; 140MB</b></li>
+            <li><b>small &mdash; 460MB</b></li>
+            <li><b>medium &mdash; 1.5GB</b></li>
+            <li><b>large-v3-turbo &mdash; 1.6GB</b></li>
+          </ul>
+        </article>
+
+        <article class="card highlight">
+          <span class="card-tag accent">Parakeet</span>
+          <h3>NVIDIA Parakeet</h3>
+          <p>Fast, accurate, GPU-accelerated. Excellent for English. Newest research from NVIDIA NeMo.</p>
+          <ul class="card-list">
+            <li><b>parakeet-tdt-0.6b-v2</b></li>
+            <li><b>parakeet-tdt-0.6b-v3</b></li>
+            <li>Requires NVIDIA GPU</li>
+            <li>Sub-100ms first token</li>
+            <li>English, ~600MB</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="card-tag">Canary</span>
+          <h3>NVIDIA Canary</h3>
+          <p>Multilingual ASR + translation. Transcribe English, get Spanish &mdash; in one pass.</p>
+          <ul class="card-list">
+            <li><b>canary-1b</b></li>
+            <li><b>canary-180m-flash</b></li>
+            <li>4 languages &amp; translation</li>
+            <li>Requires NVIDIA GPU</li>
+            <li>~1.0GB</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============== DOWNLOAD ============== -->
+    <section class="download" id="download">
+      <div class="dl-card">
+        <div class="dl-text">
+          <span class="kicker">04 — Get it</span>
+          <h2>Free while in beta.</h2>
+          <p>Windows 10/11, x64. Installer is ~14MB. Models download separately, on demand, from inside the app.</p>
+        </div>
+        <div class="dl-side">
+          <a href="#download" class="btn primary big" aria-label="Download Flyon Vox for Windows (mockup)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download for Windows</span>
+          </a>
+          <span class="dl-note">.exe installer &middot; ~14MB &middot; no account required</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <span class="brand-mark small" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </span>
+        <span class="foot-name">Flyon <em>Vox</em></span>
+      </div>
+      <p class="foot-tag">Local dictation, made with care.</p>
+      <div class="foot-links">
+        <a href="#features">Features</a>
+        <a href="#how">How</a>
+        <a href="#download">Download</a>
+      </div>
+      <p class="foot-fine">&copy; <span id="year"></span> Flyon Vox. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          const el = document.querySelector(id);
+          if (el) {
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

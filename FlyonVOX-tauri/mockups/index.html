@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Whisper · Layout Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#141310;color:#ede9dd;font-family:'Inter',sans-serif;padding:40px}
+.wrap{max-width:860px;width:100%}
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em}
+p.sub{color:#a49e8d;margin:8px 0 28px;font-size:13.5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+a.card{display:block;text-decoration:none;color:inherit;background:#1b1916;border:1px solid #302c24;border-radius:14px;padding:22px;transition:.16s ease}
+a.card:hover{border-color:#d9a441;background:#211e19;transform:translateY(-2px)}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#d9a441;text-transform:uppercase}
+.name{font-size:17px;font-weight:700;margin:6px 0 8px}
+.desc{font-size:12.5px;color:#a49e8d;line-height:1.55}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Layout Mockups</h1>
+  <p class="sub">Static replicas · same colors, no logic. Open one, imagine using it daily.</p>
+  <div class="grid">
+    <a class="card" href="command-deck/index.html">
+      <span class="tag">A</span>
+      <div class="name">Command Deck</div>
+      <div class="desc">Full-height transcript, floating record pill, IDE-style status bar with clickable chips.</div>
+    </a>
+    <a class="card" href="voice-memo/index.html">
+      <span class="tag">B</span>
+      <div class="name">Voice Memo Studio</div>
+      <div class="desc">Top control chips, giant canvas, big round record button bottom-center.</div>
+    </a>
+    <a class="card" href="console/index.html">
+      <span class="tag">C</span>
+      <div class="name">Console / Chat</div>
+      <div class="desc">Session history list on the left, current transcript + composer bar on the right.</div>
+    </a>
+    <a class="card" href="zen/index.html">
+      <span class="tag">D</span>
+      <div class="name">Zen</div>
+      <div class="desc">Centered mic ring and nothing else. Everything behind one gear icon.</div>
+    </a>
+  </div>
+</div>
+</body>
+</html>
