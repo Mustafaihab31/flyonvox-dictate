@@ -94,8 +94,8 @@ const ENGINES = [
     note: 'Coming soon. NVIDIA Parakeet support is still being tested.',
     comingSoon: true,
     models: [
-      { value: 'parakeet-tdt-0.6b-v2', label: 'parakeet-tdt-0.6b-v2', params: '0.6B', size: '460MB', langs: 'English' },
-      { value: 'parakeet-tdt-0.6b-v3', label: 'parakeet-tdt-0.6b-v3', params: '0.6B', size: '465MB', langs: '25 languages' },
+      { value: 'parakeet-tdt-0.6b-v2', label: 'parakeet-tdt-0.6b-v2', params: '0.6B', size: '460MB', langs: 'English', comingSoon: true },
+      { value: 'parakeet-tdt-0.6b-v3', label: 'parakeet-tdt-0.6b-v3', params: '0.6B', size: '465MB', langs: '25 languages', comingSoon: true },
     ],
   },
   {
@@ -104,13 +104,13 @@ const ENGINES = [
     note: 'Coming soon. NVIDIA Canary support is still being tested.',
     comingSoon: true,
     models: [
-      { value: 'canary-180m-flash', label: 'canary-180m-flash', params: '180M', size: '147MB', langs: 'en/de/fr/es' },
+      { value: 'canary-180m-flash', label: 'canary-180m-flash', params: '180M', size: '147MB', langs: 'en/de/fr/es', comingSoon: true },
     ],
   },
 ];
 
 const ALL_ENGINE_MODELS = ENGINES.flatMap((e) =>
-  e.models.map((m) => ({ ...m, engine: e.id }))
+  e.models.map((m) => ({ ...m, engine: e.id, comingSoon: e.comingSoon || m.comingSoon }))
 );
 
 let isRecording = false;
@@ -553,9 +553,11 @@ function buildDownloadList() {
 
     const head = document.createElement('button');
     head.className = 'dl-folder-head';
+    const engineAvailability = engine.comingSoon ? '<span class="soon-tag">Coming soon</span>' : '';
     head.innerHTML = `
       <svg class="dl-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       <span>${engine.name}</span>
+      ${engineAvailability}
       <span class="dl-count">${engine.models.length}</span>
     `;
     head.addEventListener('click', () => {
@@ -589,7 +591,9 @@ function buildDownloadList() {
       item.appendChild(size);
 
       const btn = document.createElement('button');
-      btn.className = 'dl-btn';
+      btn.className = m.comingSoon ? 'dl-btn soon' : 'dl-btn';
+      btn.textContent = m.comingSoon ? 'Coming soon' : 'Download';
+      btn.disabled = !!m.comingSoon;
       item.appendChild(btn);
       dlButtons[m.value] = btn;
 
