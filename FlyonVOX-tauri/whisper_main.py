@@ -8,6 +8,7 @@ import time
 import gc
 import tarfile
 import urllib.request
+import ctypes
 from pathlib import Path
 
 # ---- App-local model storage ---- #
@@ -76,6 +77,168 @@ def get_repo_ids(model_name):
 
 SAMPLE_RATE = 16000
 CHANNELS = 1
+
+# pyperclip only handles text. On Windows, preserve the native clipboard
+# formats so images, HTML, and rich content survive the dictation paste.
+_CLIPBOARD_MAX_BYTES = 64 * 1024 * 1024
+_GMEM_MOVEABLE = 0x0002
+_CF_BITMAP = 2
+_CF_METAFILEPICT = 3
+_CF_PALETTE = 9
+_CF_ENHMETAFILE = 14
+_CF_OWNERDISPLAY = 0x0080
+_CF_DSPBITMAP = 0x0082
+_CF_DSPMETAFILEPICT = 0x0083
+
+
+def _configure_clipboard_api():
+    """Return configured Win32 clipboard APIs, or None on non-Windows."""
+    if os.name != "nt":
+        return None
+
+    user32 = ctypes.WinDLL("user32", use_last_error=True)
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    handle = ctypes.c_void_p
+
+    user32.OpenClipboard.argtypes = [handle]
+    user32.OpenClipboard.restype = ctypes.c_bool
+    user32.CloseClipboard.argtypes = []
+    user32.CloseClipboard.restype = ctypes.c_bool
+    user32.EmptyClipboard.argtypes = []
+    user32.EmptyClipboard.restype = ctypes.c_bool
+    user32.EnumClipboardFormats.argtypes = [ctypes.c_uint]
+    user32.EnumClipboardFormats.restype = ctypes.c_uint
+    user32.GetClipboardData.argtypes = [ctypes.c_uint]
+    user32.GetClipboardData.restype = handle
+    user32.SetClipboardData.argtypes = [ctypes.c_uint, handle]
+    user32.SetClipboardData.restype = handle
+
+    kernel32.GlobalSize.argtypes = [handle]
+    kernel32.GlobalSize.restype = ctypes.c_size_t
+    kernel32.GlobalLock.argtypes = [handle]
+    kernel32.GlobalLock.restype = handle
+    kernel32.GlobalUnlock.argtypes = [handle]
+    kernel32.GlobalUnlock.restype = ctypes.c_bool
+    kernel32.GlobalAlloc.argtypes = [ctypes.c_uint, ctypes.c_size_t]
+    kernel32.GlobalAlloc.restype = handle
+    kernel32.GlobalFree.argtypes = [handle]
+    kernel32.GlobalFree.restype = handle
+
+    return user32, kernel32
+
+
+def _open_windows_clipboard(user32):
+    for _ in range(20):
+        if user32.OpenClipboard(None):
+            return True
+        time.sleep(0.01)
+    return False
+
+
+def _snapshot_windows_clipboard():
+    """Capture HGLOBAL-backed clipboard formats, including common image data."""
+    api = _configure_clipboard_api()
+    if api is None:
+        return None
+    user32, kernel32 = api
+    if not _open_windows_clipboard(user32):
+        return None
+
+    formats = []
+    skip_formats = {
+        _CF_BITMAP,
+        _CF_METAFILEPICT,
+        _CF_PALETTE,
+        _CF_ENHMETAFILE,
+        _CF_OWNERDISPLAY,
+        _CF_DSPBITMAP,
+        _CF_DSPMETAFILEPICT,
+    }
+    try:
+        clipboard_format = 0
+        while True:
+            clipboard_format = user32.EnumClipboardFormats(clipboard_format)
+            if not clipboard_format:
+                break
+            if clipboard_format in skip_formats:
+                continue
+
+            data_handle = user32.GetClipboardData(clipboard_format)
+            if not data_handle:
+                continue
+            size = int(kernel32.GlobalSize(data_handle))
+            if size <= 0 or size > _CLIPBOARD_MAX_BYTES:
+                continue
+
+            data_ptr = kernel32.GlobalLock(data_handle)
+            if not data_ptr:
+                continue
+            try:
+                payload = ctypes.string_at(data_ptr, size)
+            finally:
+                kernel32.GlobalUnlock(data_handle)
+            formats.append((int(clipboard_format), payload))
+    finally:
+        user32.CloseClipboard()
+    return formats
+
+
+def _restore_windows_clipboard(formats):
+    """Restore a clipboard snapshot created by _snapshot_windows_clipboard."""
+    api = _configure_clipboard_api()
+    if api is None or formats is None:
+        return False
+    user32, kernel32 = api
+    if not _open_windows_clipboard(user32):
+        return False
+
+    try:
+        if not user32.EmptyClipboard():
+            return False
+        for clipboard_format, payload in formats:
+            data_handle = kernel32.GlobalAlloc(_GMEM_MOVEABLE, max(1, len(payload)))
+            if not data_handle:
+                continue
+            data_ptr = kernel32.GlobalLock(data_handle)
+            if not data_ptr:
+                kernel32.GlobalFree(data_handle)
+                continue
+            try:
+                ctypes.memmove(data_ptr, payload, len(payload))
+            finally:
+                kernel32.GlobalUnlock(data_handle)
+
+            # SetClipboardData takes ownership only when it succeeds.
+            if not user32.SetClipboardData(clipboard_format, data_handle):
+                kernel32.GlobalFree(data_handle)
+    finally:
+        user32.CloseClipboard()
+    return True
+
+
+def capture_clipboard():
+    """Capture the current clipboard with native formats when available."""
+    if os.name == "nt":
+        snapshot = _snapshot_windows_clipboard()
+        return ("windows", snapshot) if snapshot is not None else None
+    try:
+        return ("text", pyperclip.paste())
+    except Exception:
+        return None
+
+
+def restore_clipboard(snapshot):
+    """Restore a clipboard snapshot, preserving images on Windows."""
+    if snapshot is None:
+        return False
+    kind, payload = snapshot
+    if kind == "windows":
+        return _restore_windows_clipboard(payload)
+    try:
+        pyperclip.copy(payload)
+        return True
+    except Exception:
+        return False
 
 CONFIG_FILE = APP_DIR / "config.json"
 HF_CACHE = MODELS_DIR / "huggingface" / "hub"          # new downloads land here
@@ -568,13 +731,13 @@ def _transcribe_session():
     if final_text:
         send_json({"type": "transcript", "text": final_text})
 
-        # Preserve clipboard: remember what the user had copied, restore after paste
+        # Preserve clipboard: remember native formats, including images, and
+        # restore them after the transcript has been pasted.
         saved_clipboard = None
         if config.get("preserve_clipboard"):
-            try:
-                saved_clipboard = pyperclip.paste()
-            except Exception:
-                saved_clipboard = None
+            saved_clipboard = capture_clipboard()
+            if saved_clipboard is None:
+                print("Clipboard preservation could not capture the current clipboard", file=sys.stderr)
 
         try:
             pyperclip.copy(final_text)
@@ -589,13 +752,11 @@ def _transcribe_session():
             pyautogui.hotkey("ctrl", "v")
             # Give the target app a beat to read the clipboard, then restore it
             time.sleep(0.2)
-            if saved_clipboard is not None:
-                try:
-                    pyperclip.copy(saved_clipboard)
-                except Exception:
-                    pass
         except Exception as e:
             print(f"Clipboard paste error: {e}", file=sys.stderr)
+        finally:
+            if saved_clipboard is not None and not restore_clipboard(saved_clipboard):
+                print("Clipboard preservation could not restore the original clipboard", file=sys.stderr)
     else:
         send_json({"type": "transcript", "text": ""})
 
