@@ -681,22 +681,6 @@ copyBtn.addEventListener('click', async () => {
   }
 });
 
-// ---- Renderer-level shortcut fallback ---- //
-
-document.addEventListener('keydown', (e) => {
-  const hotkey = formatHotkey(e);
-  if (hotkey && (hotkey === activeHotkey || hotkey === 'Ctrl+Shift+R')) {
-    e.preventDefault();
-    if ((isModelLoading || isTranscribing) && !isRecording) return; // locked while loading/transcribing
-    if (!isRecording) {
-      output.value = '';
-      updateSessionMeta();
-      activateView('dictation');
-    }
-    send('toggle');
-  }
-});
-
 // ---- Onboarding (first-use wizard) ---- //
 
 const OB_STEP_NAMES = ['Model', 'Behavior', 'Finish'];

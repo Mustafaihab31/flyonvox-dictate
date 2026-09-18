@@ -52,8 +52,13 @@ NEMO_MODELS = {
     },
 }
 
-# Short, natural priming prompt for developer context
-INITIAL_PROMPT = "Transcribing software development, code, and technical discussion."
+# Keep the decoder neutral by default. A domain prompt can make a final padded
+# Whisper window continue a plausible sentence after the user has stopped.
+VAD_PARAMETERS = {
+    "min_silence_duration_ms": 700,
+    "speech_pad_ms": 200,
+    "min_speech_duration_ms": 200,
+}
 
 MODEL_REPO_ALIASES = {
     "large-v3-turbo": [
@@ -534,10 +539,27 @@ def _transcribe_session():
             segments, _ = model.transcribe(
                 audio_data,
                 beam_size=1,
+                temperature=0.0,
                 vad_filter=True,
+                vad_parameters=VAD_PARAMETERS,
                 language=lang,
-                initial_prompt=INITIAL_PROMPT,
+                condition_on_previous_text=False,
             )
+            segments = list(segments)
+            for segment in segments:
+                print(
+                    "[transcription] "
+                    f"segment={getattr(segment, 'id', '?')} "
+                    f"start={getattr(segment, 'start', 0.0):.2f} "
+                    f"end={getattr(segment, 'end', 0.0):.2f} "
+                    f"temperature={getattr(segment, 'temperature', '?')} "
+                    f"no_speech_prob={getattr(segment, 'no_speech_prob', '?')} "
+                    f"avg_logprob={getattr(segment, 'avg_logprob', '?')} "
+                    f"compression_ratio={getattr(segment, 'compression_ratio', '?')} "
+                    f"text={segment.text!r}",
+                    file=sys.stderr,
+                    flush=True,
+                )
             final_text = " ".join(seg.text for seg in segments).strip()
         except Exception as e:
             print(f"Transcription error: {e}", file=sys.stderr)
